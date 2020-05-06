@@ -14,6 +14,16 @@
         android:padding="50dp"
         android:src="@drawable/multimedia" />
 
+    <TextView
+        android:textSize="24sp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/songName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Text Song"
+         />
+
     <SeekBar
         android:id="@+id/position"
         android:layout_marginLeft="30dp"
@@ -76,6 +86,4 @@
             android:background="@drawable/right" />
 
     </LinearLayout>
-
-
 </LinearLayout>

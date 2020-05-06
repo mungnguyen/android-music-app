@@ -16,9 +16,11 @@ public class MainActivity extends AppCompatActivity {
     Button playBtn, leftBtn, rightBtn;
     SeekBar positionBar;
     ImageView media;
-    TextView playTime, endTime;
+    TextView playTime, endTime, songName;
     MediaPlayer mp;
     int totalTime;
+    int currentSong = 1;
+    int[] stt = {1, 2, 3};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +35,96 @@ public class MainActivity extends AppCompatActivity {
         mp.seekTo(0);
         mp.setVolume(0.5f, 0.5f);
         totalTime = mp.getDuration();
+        songName.setText("Noi ta cho em");
+        mp.start();
+        playBtn.setBackgroundResource(R.drawable.pause);
 
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 playBtnClick(v);
+            }
+        });
+
+        leftBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (currentSong) {
+                    case 1:
+                        mp = MediaPlayer.create(MainActivity.this, R.raw.yeu_va_yeu);
+                        mp.setLooping(true);
+                        mp.seekTo(0);
+                        mp.setVolume(0.5f, 0.5f);
+                        totalTime = mp.getDuration();
+                        songName.setText("Yeu va yeu");
+                        currentSong = 3;
+                        mp.start();
+                        playBtn.setBackgroundResource(R.drawable.pause);
+                        break;
+                    case 2:
+                        mp = MediaPlayer.create(MainActivity.this, R.raw.noi_ta_cho_em);
+                        mp.setLooping(true);
+                        mp.seekTo(0);
+                        mp.setVolume(0.5f, 0.5f);
+                        totalTime = mp.getDuration();
+                        songName.setText("Noi ta cho em");
+                        currentSong = 1;
+                        mp.start();
+                        playBtn.setBackgroundResource(R.drawable.pause);
+                        break;
+                    case 3:
+                        mp = MediaPlayer.create(MainActivity.this, R.raw.vo);
+                        mp.setLooping(true);
+                        mp.seekTo(0);
+                        mp.setVolume(0.5f, 0.5f);
+                        totalTime = mp.getDuration();
+                        songName.setText("Vo");
+                        currentSong = 2;
+                        mp.start();
+                        playBtn.setBackgroundResource(R.drawable.pause);
+                        break;
+                }
+            }
+        });
+
+        rightBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (currentSong) {
+                    case 1:
+                        mp = MediaPlayer.create(MainActivity.this, R.raw.vo);
+                        mp.setLooping(true);
+                        mp.seekTo(0);
+                        mp.setVolume(0.5f, 0.5f);
+                        totalTime = mp.getDuration();
+                        songName.setText("Vo");
+                        currentSong = 2;
+                        mp.start();
+                        playBtn.setBackgroundResource(R.drawable.pause);
+                        break;
+                    case 2:
+                        mp = MediaPlayer.create(MainActivity.this, R.raw.yeu_va_yeu);
+                        mp.setLooping(true);
+                        mp.seekTo(0);
+                        mp.setVolume(0.5f, 0.5f);
+                        totalTime = mp.getDuration();
+                        songName.setText("Yeu va yeu");
+                        currentSong = 3;
+                        mp.start();
+                        playBtn.setBackgroundResource(R.drawable.pause);
+                        break;
+                    case 3:
+                        mp = MediaPlayer.create(MainActivity.this, R.raw.noi_ta_cho_em);
+                        mp.setLooping(true);
+                        mp.seekTo(0);
+                        mp.setVolume(0.5f, 0.5f);
+                        totalTime = mp.getDuration();
+                        songName.setText("Noi ta cho em");
+                        currentSong = 1;
+                        mp.start();
+                        playBtn.setBackgroundResource(R.drawable.pause);
+                        break;
+                }
             }
         });
 
@@ -131,5 +218,6 @@ public class MainActivity extends AppCompatActivity {
 
         playTime    = findViewById(R.id.playTime);
         endTime     = findViewById(R.id.endTime);
+        songName    = findViewById(R.id.songName);
     }
 }
