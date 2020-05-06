@@ -34,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
         mp.setVolume(0.5f, 0.5f);
         totalTime = mp.getDuration();
 
+        playBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playBtnClick(v);
+            }
+        });
+
         // Seek bar
         positionBar.setMax(totalTime);
         positionBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
