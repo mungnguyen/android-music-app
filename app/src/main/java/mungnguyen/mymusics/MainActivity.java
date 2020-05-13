@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         map();
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        media.startAnimation(animation);
 
         // Media player
         mp = MediaPlayer.create(this, R.raw.noi_ta_cho_em);
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mp.release();
                 switch (currentSong) {
                     case 1:
                         mp = MediaPlayer.create(MainActivity.this, R.raw.yeu_va_yeu);
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         playBtn.setBackgroundResource(R.drawable.pause);
                         break;
                     case 2:
+
                         mp = MediaPlayer.create(MainActivity.this, R.raw.noi_ta_cho_em);
                         mp.setLooping(true);
                         mp.seekTo(0);
@@ -73,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         playBtn.setBackgroundResource(R.drawable.pause);
                         break;
                     case 3:
+
                         mp = MediaPlayer.create(MainActivity.this, R.raw.vo);
                         mp.setLooping(true);
                         mp.seekTo(0);
@@ -90,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         rightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mp.release();
                 switch (currentSong) {
                     case 1:
                         mp = MediaPlayer.create(MainActivity.this, R.raw.vo);
@@ -197,14 +205,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void playBtnClick(View view) {
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+
         if(!mp.isPlaying()) {
             // Stop play music state
             mp.start();
             playBtn.setBackgroundResource(R.drawable.pause);
+            media.startAnimation(animation);
+
         } else {
             // running state
             mp.pause();
             playBtn.setBackgroundResource(R.drawable.play);
+            media.clearAnimation();
+            
         }
     }
 
